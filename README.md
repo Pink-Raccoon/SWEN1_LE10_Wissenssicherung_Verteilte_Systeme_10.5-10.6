@@ -1,6 +1,6 @@
 # SWEN1_LE10_Wissenssicherung_Verteilte_Systeme_10.5-10.6
 
-Dies ist der Quellcode für die Aufgaben 10.5 und 10.6 in der Wissensicherung.  
+Dies ist der Quellcode für die Aufgaben 10.5 und 10.6 in der Wissenssicherung.  
 
 ## Bilden und Ausführen der Applikation  
 Die Applikation kann direkt als Maven-Projekt in eine IDE importiert werden. 
