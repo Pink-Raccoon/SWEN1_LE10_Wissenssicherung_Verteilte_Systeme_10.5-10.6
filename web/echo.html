@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles/mystyles.css">  
+	<title>Echo Client</title>
+
+	<script>
+		var uri = "ws://" + window.location.host + "/ws/echo";
+		var socket;
+
+		function $(id) {
+			return document.getElementById(id);
+		}
+
+		function sendMessage() {
+			socket.send($("userInput").value);
+		}
+
+		window.onload = function () {
+			if (! "WebSocket" in window) {
+				$("status").innerHTML = "The browser does not support WebSockets.";
+				return;
+			}
+
+			socket = new WebSocket(uri);
+
+			socket.onopen = function () {
+				$("status").innerHTML = "onOpen";
+			};
+
+			socket.onclose = function () {
+				$("status").innerHTML = "onClose";
+			};
+
+			socket.onerror = function (error) {
+				$("status").innerHTML = error;
+			};
+
+			socket.onmessage = function (message) {
+				$("data").innerHTML = message.data;
+			};
+		}
+
+		window.onunload = function () {
+			socket.close();
+		}
+	</script>
+</head>
+
+<header>
+	<h1>Echo Test</h1>
+	<p>
+	Just a test client for WebSockets.
+	</p>
+</header>
+
+<main>
+	<body>
+		<input id="userInput" type="text" placeholder="Enter a message.">
+		<button onclick="sendMessage()">Send</button>
+		<p/>
+		<div id="status"></div>
+		<p/>
+		<div id="data"></div>
+	</body>
+</main>
+
+<footer>
+    <p>&copy; 2020 ZHAW School of Engineering</p>
+</footer> 
+
+</html>

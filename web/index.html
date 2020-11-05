@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles/mystyles.css">
+	<title>Online Chat SWEN1</title>
+</head>
+
+<header>
+	<h1>Chat Room Public</h1>
+	<label id="username">Signed in: noname</label><br />
+	<label id="participants" title="[User1, User2, ...]"># Participants</label>
+</header>
+
+<main>
+
+	<body>
+		<p>
+		<div id="message"></div>
+		<input id="userInput" type="text" placeholder="Enter a message." autofocus />
+		<button onclick="sendMessage();">Send</button>
+		</p>
+	</body>
+</main>
+
+<footer>
+	<p>&copy; 2020 ZHAW School of Engineering</p>
+</footer>
+
+<script src="scripts/websocket.js"></script>
+
+</html>

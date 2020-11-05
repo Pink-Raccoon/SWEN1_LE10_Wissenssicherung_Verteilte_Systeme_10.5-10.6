@@ -1,0 +1,23 @@
+#chatroomname {
+-fx-font-size: 16pt;
+-fx-font-family: sans-serif;
+-fx-font-weight: bold;
+}
+#participants {
+-fx-font-size: 11pt;
+-fx-font-family: sans-serif;
+-fx-text-fill: darkblue;
+}
+#chatuser {
+-fx-font-size: 11pt;
+-fx-font-family: sans-serif;
+}
+#input {
+-fx-font-size: 11pt;
+-fx-font-family: sans-serif;
+}
+#chathistory {
+-fx-font-size: 11pt;
+-fx-font-family: sans-serif;
+}
+

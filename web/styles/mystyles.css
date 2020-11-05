@@ -1,0 +1,44 @@
+header {
+  font-family:sans-serif;
+  background-color: White;
+  margin-left: 1em;
+}
+
+main {
+  font-family:sans-serif;
+  font-size: 1em;
+  background-color: White;
+  margin-left: 1em;
+}
+
+footer {
+  font-family:sans-serif;
+  font-size: 0.7em;
+  background-color: White;
+  margin-left: 1em;
+}
+
+#message {
+  background-color: rgba(227, 241, 250, 0.972);
+  margin-bottom: 1em;
+  border-radius: 1em;
+  padding: 0.5em;
+  width: 39em;
+  word-wrap: break-word;
+}
+
+input {
+ font-family:sans-serif;
+ font-size: 1em;
+ width: 40em 
+}
+
+button {
+  font-family:sans-serif;
+  font-size: 1em;  
+}
+
+#sendMessage {
+  font-family:sans-serif;
+  font-size: 1em;
+ }
