@@ -3,15 +3,17 @@ package ch.zhaw.soe.swen1.le10.chat.api.common;
 import ch.zhaw.soe.swen1.le10.chat.domain.ChatListener;
 import ch.zhaw.soe.swen1.le10.chat.domain.ChatService;
 import ch.zhaw.soe.swen1.le10.chat.domain.NicknameAlreadyUsedException;
-import ch.zhaw.soe.swen1.le10.chat.domain.OnlineChat;
 
 /**
- * Implements a thread-safe proxy for accessing the online chat from different
- * client aka channels.
+ * Implements a thread-safe proxy for accessing the chat service from different client aka channels. 
  */
-public class ChatServiceProxy implements ChatService {
-    static final String CHAT_NAME = "SWEN1";
-    private static final OnlineChat chatservice = new OnlineChat(CHAT_NAME);
+class ChatServiceProxy implements ChatService {
+   
+    private final ChatService chatservice; 
+
+    ChatServiceProxy(ChatService chatservice) {
+        this.chatservice = chatservice;
+    }
 
     @Override
     public String getName() {
@@ -19,8 +21,7 @@ public class ChatServiceProxy implements ChatService {
     }
 
     @Override
-    public synchronized void join(String nickname, String chatroomname, ChatListener callback)
-            throws NicknameAlreadyUsedException {
+    public synchronized void join(String nickname, String chatroomname, ChatListener callback) throws NicknameAlreadyUsedException {
         chatservice.join(nickname, chatroomname, callback);
     }
 

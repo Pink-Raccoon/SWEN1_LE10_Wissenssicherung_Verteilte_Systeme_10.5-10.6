@@ -23,6 +23,7 @@ function sendMessage() {
     });
     console.log("Send " + json);
     socket.send(json);
+    $("userInput").value = "";
 }
 
 window.onload = function () {
@@ -46,12 +47,12 @@ window.onload = function () {
     };
 
     socket.onmessage = function (event) {
-        $("userInput").innerHTML = "";
         console.log("Received " + event.data);
         var message = JSON.parse(event.data);
-        user = message.user;
+  
         switch (message.action) { 
         case "JOIN":
+            user = message.user;
             $("username").innerHTML = "Signed in: " + user;
             break;	
         case "ACTIVE_USERS_CHANGED":

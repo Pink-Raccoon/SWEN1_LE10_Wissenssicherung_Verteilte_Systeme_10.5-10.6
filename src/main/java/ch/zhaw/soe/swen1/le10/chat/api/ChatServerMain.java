@@ -75,11 +75,7 @@ public class ChatServerMain {
 		String url = con.getScheme() + "://" + InetAddress.getLocalHost().getHostAddress() + ":" +
 				con.getPort() + ctx.getPath();
 		logger.info("URL: " + url);
-		logger.info("Press ENTER and CTRL + C to stop the server.");
-
-		System.in.read();
-		tomcat.stop();
-		tomcat.destroy();
+		logger.info("Press CTRL + C to stop the server.");
 	}
 }
 
