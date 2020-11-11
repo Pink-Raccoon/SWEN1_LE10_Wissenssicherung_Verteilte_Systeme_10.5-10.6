@@ -41,7 +41,7 @@ public class ChatClientSession implements ChatListener {
 		logger.fine(session.getId() + ": onOpen");
 		try {
 			ChatServiceLocator.getInstance().join(user, OnlineChat.PUBLIC_CHATROOM, this);
-			Message msg = new Message(Action.JOIN, user, "Joined");
+			Message msg = new Message(Action.JOINED, user, "");
 			session.getBasicRemote().sendObject(msg);
 		} catch (NicknameAlreadyUsedException e) {
 			Message msg = new Message(Action.JOIN_ERROR, user,

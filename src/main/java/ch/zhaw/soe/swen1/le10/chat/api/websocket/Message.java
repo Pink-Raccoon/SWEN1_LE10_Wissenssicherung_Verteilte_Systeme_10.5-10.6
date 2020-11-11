@@ -5,7 +5,7 @@ package ch.zhaw.soe.swen1.le10.chat.api.websocket;
  */
 public class Message {
     public enum Action {
-        JOIN, LEAVE, SAY, JOIN_ERROR, ACTIVE_USERS_CHANGED
+        JOIN, LEAVE, SAY, JOINED, JOIN_ERROR, ACTIVE_USERS_CHANGED
     }
     private Action action;
     private String user;

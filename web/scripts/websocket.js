@@ -51,7 +51,7 @@ window.onload = function () {
         var message = JSON.parse(event.data);
   
         switch (message.action) { 
-        case "JOIN":
+        case "JOINED":
             user = message.user;
             $("username").innerHTML = "Signed in: " + user;
             break;	
