@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * Combined tests for the online chat domain logic. Because domain classes are
- * quite simple, only integration tests have been written.
+ * quite simple, only integration tests have to be written.
  *
  */
 @ExtendWith(MockitoExtension.class)

@@ -10,7 +10,7 @@ public interface ChatService {
     public String getName();
 
     /**
-     * Join for chatting a chat room.
+     * Join for a chat room.
      * 
      * @param nickname     must be not null and not blank
      * @param chatroomname must be not null and not blank
