@@ -21,8 +21,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 /**
- * The client session created by the WebSocket API when a client opens the chat
- * url.
+ * The client session is created by the WebSocket API when a client opens the chat url.
+ * Each client gets is own session.
  */
 @ServerEndpoint(value = "/chat", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
 public class ChatClientSession implements ChatListener {
