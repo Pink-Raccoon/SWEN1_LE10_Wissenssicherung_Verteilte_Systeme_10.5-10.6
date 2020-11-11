@@ -21,7 +21,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 /**
- * The client session created by the WebSocket API when a client opens the chat url.
+ * The client session created by the WebSocket API when a client opens the chat
+ * url.
  */
 @ServerEndpoint(value = "/chat", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
 public class ChatClientSession implements ChatListener {
@@ -43,7 +44,8 @@ public class ChatClientSession implements ChatListener {
 			Message msg = new Message(Action.JOIN, user, "Joined");
 			session.getBasicRemote().sendObject(msg);
 		} catch (NicknameAlreadyUsedException e) {
-			Message msg = new Message(Action.JOIN_ERROR, user, String.format("Nickname %s is already in use! Start with a new name.", user));
+			Message msg = new Message(Action.JOIN_ERROR, user,
+					String.format("Nickname %s is already in use! Start with a new name.", user));
 			session.getBasicRemote().sendObject(msg);
 		}
 	}
@@ -51,7 +53,7 @@ public class ChatClientSession implements ChatListener {
 	@OnClose
 	public void onClose(Session session) {
 		logger.fine(session.getId() + ": onClose");
-		ChatServiceLocator.getInstance().leave(user, OnlineChat.PUBLIC_CHATROOM);		
+		ChatServiceLocator.getInstance().leave(user, OnlineChat.PUBLIC_CHATROOM);
 	}
 
 	@OnError
@@ -61,7 +63,30 @@ public class ChatClientSession implements ChatListener {
 
 	@OnMessage
 	public void onMessage(Session session, Message message) {
-		ChatServiceLocator.getInstance().post(message.getUser(), OnlineChat.PUBLIC_CHATROOM, message.getText());
+		switch (message.getAction()) {
+			case SAY:
+				ChatServiceLocator.getInstance().post(message.getUser(), OnlineChat.PUBLIC_CHATROOM, message.getText());
+				break;
+			case JOIN:
+				try {
+					ChatServiceLocator.getInstance().join(message.getUser(), OnlineChat.PUBLIC_CHATROOM, this);
+				} catch (NicknameAlreadyUsedException e) {
+					Message msg = new Message(Action.JOIN_ERROR, user,
+					String.format("Nickname %s is already in use! Start with a new name.", user));
+					try {
+						session.getBasicRemote().sendObject(msg);
+					} catch (IOException | EncodeException e1) {
+						e1.printStackTrace();
+					}
+					e.printStackTrace();
+				}
+				break;
+			case LEAVE:
+				ChatServiceLocator.getInstance().leave(message.getUser(), OnlineChat.PUBLIC_CHATROOM);
+				break;
+			default:
+				break;
+		}
 	}
 
 	@Override
@@ -82,10 +107,10 @@ public class ChatClientSession implements ChatListener {
 			throws ListenerNotReachableException {
 		try {
 			if (session.isOpen()) {
-				Message msg = new Message(Action.ACTIVE_USERS_CHANGED, user, activeChatUsers.size() + " Participant(s)");
+				Message msg = new Message(Action.ACTIVE_USERS_CHANGED, user,
+						activeChatUsers.size() + " Participant(s)");
 				session.getBasicRemote().sendObject(msg);
-			}
-			else
+			} else
 				throw new ListenerNotReachableException("Session closed.");
 		} catch (IOException | EncodeException e) {
 			e.printStackTrace();

@@ -13,7 +13,7 @@ public interface ChatService {
      * Join for chatting a chat room.
      * 
      * @param nickname     must be not null and not blank
-     * @param chatroomname must be not null an not blank
+     * @param chatroomname must be not null and not blank
      * @param callback     remote interface for calling back the client; must not be null
      * @throws NicknameAlreadyUsedException if nickname is already used
      */
